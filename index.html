@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Sign-up</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="main">
+        <form action="" method="POST" class="form" id="form-1">
+            <h2>Thành viên đăng ký</h2>
+            <p>Cùng nhau học lập trình miễn phí tại F8 ❤️</p>
+
+            <div class="space"></div>
+
+            <div class="form--group">
+                <label for="fullname" class="form--label">Tên đầy đủ</label>
+                <input id="fullname" class="form--control" name="fullname" type="text" placeholder="VD: Sơn Đặng">
+                <span class="form--message"></span>
+            </div>
+
+            <div class="form--group">
+                <label for="email" class="form--label">Email</label>
+                <input id="email" class="form--control" name="email" type="text" placeholder="VD: example@example.com">
+                <span class="form--message"></span>
+            </div>
+
+            <div class="form--group">
+                <label for="password" class="form--label">Mật khẩu</label>
+                <input id="password" class="form--control" name="password" type="password" placeholder="********">
+                <span class="form--message"></span>
+            </div>
+
+            <div class="form--group">
+                <label for="password--again" class="form--label">Nhập lại mật khẩu</label>
+                <input id="password--again" class="form--control" name="password--again" type="password" placeholder="********">
+                <span class="form--message"></span>
+            </div>
+
+
+            <button class="sign-up--btn">Đăng kí</button>
+        </form>
+    </div>
+
+    <script src="./validator.js"></script>
+    <script>
+        
+        Validator({
+            form: "#form-1",
+            rules: [
+                Validator.isRequired('#fullname', "Vui lòng nhập trường này"),
+                Validator.isRequired('#email', "Vui lòng nhập trường này"),
+                Validator.isEmail('#email'),
+                Validator.isPassword('#password', 8),
+                Validator.isRequired('#password--again', "Vui lòng nhập trường này"),
+                Validator.isPasswordAgain('#password--again', 'Mật khẩu nhập lại không chính xác')
+            ],
+            onSubmit: function (data) {
+                // call API
+                console.log(data)
+            }
+        })
+
+    </script>
+</body>
+</html>
