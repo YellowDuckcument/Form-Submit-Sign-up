@@ -22,7 +22,7 @@
             </div>
 
             <div class="form--group">
-                <label for="email" class="form--label">Email</label>
+                <label for="email" class="form--label">Email <i style="font-size: 12px;font-weight: 300;">(Không bắt buộc)</i></label>
                 <input id="email" class="form--control" name="email" type="text" placeholder="VD: example@example.com">
                 <span class="form--message"></span>
             </div>
@@ -39,29 +39,79 @@
                 <span class="form--message"></span>
             </div>
 
+            <div class="form--group">
+                <label for="avatar" class="form--label">Ảnh đại diện</label>
+                <input id="avatar" class="form--control" name="avatar" type="file">
+                <span class="form--message"></span>
+            </div>
+
+            <div class="form--group">
+                <label for="province" class="form--label"> Tỉnh thành</label>
+                <select id="province" class="form--control" name="province">
+                    <option value="">-- Chọn Tỉnh/Thành phố --</option>
+                    <option value="hni">Hà Nội</option>
+                    <option value="hcm">Hồ Chí Minh</option>
+                </select>
+                <span class="form--message"></span>
+            </div>
+
+            <div class="form--group">
+                <label for="gender" class="form--label">Giới tính</label>
+                <div class="center">
+                    <span>Nam
+                        <input class="form--control" name="gender" type="checkbox" value="male">
+                    </span>
+                    <span>Nữ
+                        <input class="form--control" name="gender" type="checkbox" value="female">
+                    </span>
+                    <span>Khác
+                        <input class="form--control" name="gender" type="checkbox" value="orther">
+                    </span>
+                </div>
+                
+                <span class="form--message"></span>
+            </div>
+
 
             <button class="sign-up--btn">Đăng kí</button>
         </form>
     </div>
 
     <script src="./validator.js"></script>
+
     <script>
         
-        Validator({
-            form: "#form-1",
-            rules: [
-                Validator.isRequired('#fullname', "Vui lòng nhập trường này"),
-                Validator.isRequired('#email', "Vui lòng nhập trường này"),
-                Validator.isEmail('#email'),
-                Validator.isPassword('#password', 8),
-                Validator.isRequired('#password--again', "Vui lòng nhập trường này"),
-                Validator.isPasswordAgain('#password--again', 'Mật khẩu nhập lại không chính xác')
-            ],
-            onSubmit: function (data) {
-                // call API
-                console.log(data)
-            }
+        document.addEventListener('DOMContentLoaded', (event) => {
+            Validator({
+                form: "#form-1",
+                formGroupSelector: ".form--group",
+                rules: [
+                    Validator.isRequired('#fullname', "Vui lòng nhập trường này"),
+
+                    Validator.isRequired('#email', "Vui lòng nhập trường này"),
+                    Validator.isEmail('#email'),
+
+                    Validator.isRequired('#password', "Vui lòng nhập trường này"),
+                    Validator.isPassword('#password', 4),
+
+                    Validator.isRequired('#password--again', "Vui lòng nhập trường này"),
+                    Validator.isPasswordAgain('#password--again', 'Mật khẩu nhập lại không chính xác'),
+
+                    Validator.isRequired('#avatar'),
+                    
+                    Validator.isRequired('#province'),
+
+                    Validator.isRadio('input[name="gender"]'),
+
+                ],
+                onSubmit: function (data) {
+                    // call API
+                    console.log(data)
+                }
+            })
         })
+
+       
 
     </script>
 </body>
